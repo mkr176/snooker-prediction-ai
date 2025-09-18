@@ -421,8 +421,8 @@ def main():
 
     collector = SnookerDataCollector()
 
-    # Generate dataset
-    matches_df = collector.generate_snooker_dataset(25000)
+    # Generate dataset (reduced size for faster completion)
+    matches_df = collector.generate_snooker_dataset(5000)
 
     # Enhance with head-to-head
     enhanced_df = collector.enhance_with_head_to_head(matches_df)

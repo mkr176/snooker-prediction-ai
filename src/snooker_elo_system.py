@@ -23,20 +23,10 @@ class SnookerEloSystem:
 
         # Player ratings and statistics
         self.player_elo = {}
-        self.player_stats = defaultdict(lambda: {
-            'matches_played': 0,
-            'matches_won': 0,
-            'frames_won': 0,
-            'frames_lost': 0,
-            'centuries': 0,
-            'breaks_50_plus': 0,
-            'tournament_wins': 0,
-            'ranking_events': 0,
-            'prize_money': 0
-        })
+        self.player_stats = {}
 
         # Tournament-specific ratings (similar to tennis surfaces)
-        self.tournament_elo = defaultdict(lambda: defaultdict(lambda: initial_rating))
+        self.tournament_elo = {}
 
         # Tournament weightings (snooker equivalents)
         self.tournament_weights = {
@@ -52,12 +42,18 @@ class SnookerEloSystem:
         }
 
         # Historical ELO progression
-        self.elo_history = defaultdict(list)
+        self.elo_history = {}
 
     def get_player_rating(self, player, tournament_type='ranking_event'):
         """Get current ELO rating for a player in specific tournament type"""
         if player not in self.player_elo:
             self.player_elo[player] = self.initial_rating
+
+        if tournament_type not in self.tournament_elo:
+            self.tournament_elo[tournament_type] = {}
+
+        if player not in self.tournament_elo[tournament_type]:
+            self.tournament_elo[tournament_type][player] = self.initial_rating
 
         return self.tournament_elo[tournament_type][player]
 
@@ -108,13 +104,25 @@ class SnookerEloSystem:
         self.tournament_elo[tournament_type][loser] = loser_new
 
         # Update overall ELO (weighted average)
-        self.player_elo[winner] = np.mean([self.tournament_elo[t][winner]
-                                          for t in self.tournament_elo.keys()])
-        self.player_elo[loser] = np.mean([self.tournament_elo[t][loser]
-                                         for t in self.tournament_elo.keys()])
+        winner_ratings = []
+        loser_ratings = []
+        for t in self.tournament_elo.keys():
+            if winner in self.tournament_elo[t]:
+                winner_ratings.append(self.tournament_elo[t][winner])
+            if loser in self.tournament_elo[t]:
+                loser_ratings.append(self.tournament_elo[t][loser])
+
+        if winner_ratings:
+            self.player_elo[winner] = np.mean(winner_ratings)
+        if loser_ratings:
+            self.player_elo[loser] = np.mean(loser_ratings)
 
         # Record history
         if match_date:
+            if winner not in self.elo_history:
+                self.elo_history[winner] = []
+            if loser not in self.elo_history:
+                self.elo_history[loser] = []
             self.elo_history[winner].append((match_date, winner_new))
             self.elo_history[loser].append((match_date, loser_new))
 
@@ -123,6 +131,20 @@ class SnookerEloSystem:
 
     def update_player_stats(self, winner, loser, frames_won, frames_lost, tournament_type):
         """Update player statistics"""
+        # Initialize stats if not exists
+        if winner not in self.player_stats:
+            self.player_stats[winner] = {
+                'matches_played': 0, 'matches_won': 0, 'frames_won': 0,
+                'frames_lost': 0, 'centuries': 0, 'breaks_50_plus': 0,
+                'tournament_wins': 0, 'ranking_events': 0, 'prize_money': 0
+            }
+        if loser not in self.player_stats:
+            self.player_stats[loser] = {
+                'matches_played': 0, 'matches_won': 0, 'frames_won': 0,
+                'frames_lost': 0, 'centuries': 0, 'breaks_50_plus': 0,
+                'tournament_wins': 0, 'ranking_events': 0, 'prize_money': 0
+            }
+
         # Winner stats
         self.player_stats[winner]['matches_played'] += 1
         self.player_stats[winner]['matches_won'] += 1
