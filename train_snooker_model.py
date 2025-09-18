@@ -75,10 +75,10 @@ class Snooker85PercentModel:
             winner_elo_features = self.elo_system.get_player_elo_features(winner)
             loser_elo_features = self.elo_system.get_player_elo_features(loser)
 
-            # SNOOKER MODEL FEATURES (adapted from tennis)
-            features = {
-                # Target (1 = winner wins, 0 = loser wins) - binary like tennis
-                'target': 1,  # Winner always wins in our labeling
+            # Create training example for WINNER (target = 1)
+            winner_features = {
+                # Target (1 = player1 wins)
+                'target': 1,
 
                 # CORE ELO FEATURES (Most important - 72% accuracy alone)
                 'player_elo_diff': winner_elo_features['overall_elo'] - loser_elo_features['overall_elo'],
@@ -121,7 +121,55 @@ class Snooker85PercentModel:
                                   (winner_elo_features['recent_momentum'] - loser_elo_features['recent_momentum']),
             }
 
-            features_list.append(features)
+            # Create training example for LOSER (target = 0) - same features but from loser's perspective
+            loser_features = {
+                # Target (0 = player1 loses, player2 wins)
+                'target': 0,
+
+                # CORE ELO FEATURES (flipped perspective)
+                'player_elo_diff': loser_elo_features['overall_elo'] - winner_elo_features['overall_elo'],
+                'total_elo': loser_elo_features['overall_elo'] + winner_elo_features['overall_elo'],
+
+                # Individual ELO ratings (flipped)
+                'player1_elo': loser_elo_features['overall_elo'],
+                'player2_elo': winner_elo_features['overall_elo'],
+
+                # RECENT FORM (flipped perspective)
+                'recent_form_diff': loser_elo_features['recent_form'] - winner_elo_features['recent_form'],
+                'momentum_diff': loser_elo_features['recent_momentum'] - winner_elo_features['recent_momentum'],
+                'elo_change_diff': loser_elo_features['recent_elo_change'] - winner_elo_features['recent_elo_change'],
+
+                # EXPERIENCE AND CAREER STATS (flipped)
+                'experience_diff': loser_elo_features['matches_played'] - winner_elo_features['matches_played'],
+                'win_rate_diff': loser_elo_features['career_win_rate'] - winner_elo_features['career_win_rate'],
+
+                # SNOOKER-SPECIFIC MATCH STATISTICS (flipped)
+                'centuries_diff': match.get('loser_centuries', 0) - match.get('winner_centuries', 0),
+                'highest_break_diff': match.get('loser_highest_break', 0) - match.get('winner_highest_break', 0),
+                'score_diff': match.get('loser_score', 0) - match.get('winner_score', 0),
+                'total_frames': match.get('total_frames', match.get('winner_score', 0) + match.get('loser_score', 0)),
+                'match_duration': match.get('duration_minutes', 120),
+
+                # TOURNAMENT CONTEXT (same for both)
+                'tournament_weight': self.get_tournament_weight(tournament_type),
+                'is_world_championship': 1 if tournament_type == 'world_championship' else 0,
+                'is_major_tournament': 1 if tournament_type in ['world_championship', 'masters', 'uk_championship'] else 0,
+                'is_ranking_event': 1 if tournament_type not in ['masters'] else 0,
+
+                # HEAD-TO-HEAD FEATURES (flipped)
+                'h2h_total_matches': match.get('h2h_total_matches', 0),
+                'h2h_win_rate': 1 - match.get('winner_h2h_win_rate', 0.5),  # Flipped win rate
+
+                # COMBINED FEATURES (flipped)
+                'elo_x_form': (loser_elo_features['overall_elo'] - winner_elo_features['overall_elo']) *
+                              (loser_elo_features['recent_form'] - winner_elo_features['recent_form']),
+                'form_x_momentum': (loser_elo_features['recent_form'] - winner_elo_features['recent_form']) *
+                                  (loser_elo_features['recent_momentum'] - winner_elo_features['recent_momentum']),
+            }
+
+            # Add both perspectives (like tennis model)
+            features_list.append(winner_features)
+            features_list.append(loser_features)
 
             if idx % 5000 == 0:
                 print(f"   Processed {idx:,} matches...")

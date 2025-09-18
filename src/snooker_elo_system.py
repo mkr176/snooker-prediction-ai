@@ -199,6 +199,32 @@ class SnookerEloSystem:
         form = (win_rate * 0.7) + (frame_rate * 0.3)
         return min(max(form, 0.1), 0.9)
 
+    def get_player_elo_features(self, player):
+        """
+        Get comprehensive ELO features for a player (adapted from tennis model)
+        """
+        # Initialize player if needed
+        if player not in self.player_elo:
+            self.player_elo[player] = self.initial_rating
+            self.player_stats[player] = {
+                'matches_played': 0, 'matches_won': 0, 'frames_won': 0,
+                'frames_lost': 0, 'centuries': 0, 'breaks_50_plus': 0,
+                'tournament_wins': 0, 'ranking_events': 0, 'prize_money': 0
+            }
+
+        stats = self.player_stats[player]
+
+        features = {
+            'overall_elo': self.player_elo[player],
+            'matches_played': stats['matches_played'],
+            'career_win_rate': stats['matches_won'] / max(stats['matches_played'], 1),
+            'recent_form': self.get_player_form(player),
+            'recent_momentum': self.get_player_form(player),  # Simplified for now
+            'recent_elo_change': 0  # Simplified for now
+        }
+
+        return features
+
     def build_from_match_data(self, matches_df):
         """
         Build ELO system from historical match data
