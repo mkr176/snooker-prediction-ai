@@ -40,7 +40,7 @@ source venv/bin/activate
 
 4. Install required packages:
 ```bash
-pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+pip install -r requirements.txt
 ```
 
 5. **Train the model first** (required before making predictions):
@@ -225,6 +225,7 @@ snooker-prediction-ai/
 │   └── snooker_elo_ratings.pkl       # ELO system
 ├── predict_snooker_match.py          # Interactive interface
 ├── train_snooker_model.py            # Model training script
+├── requirements.txt                  # Python dependencies
 └── README.md                         # This file
 ```
 
@@ -348,7 +349,7 @@ deactivate
 rm -rf venv
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
-pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+pip install -r requirements.txt
 ```
 
 ### Import Errors
@@ -371,7 +372,7 @@ source venv/bin/activate  # macOS/Linux
 venv\Scripts\activate     # Windows
 
 # 3. Install dependencies
-pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+pip install -r requirements.txt
 
 # 4. Train model (REQUIRED)
 python train_snooker_model.py
