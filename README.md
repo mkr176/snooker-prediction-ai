@@ -266,13 +266,15 @@ Adjust hyperparameters in `train_snooker_model.py` for optimal performance.
 3. **Real Data Validation**: No synthetic data - only actual tournament results
 4. **Feature Importance**: ELO dominance confirmed (like tennis model)
 
-## 🎱 How It Works
+## 🎱 How It Works (Real Data Pipeline)
 
-1. **Data Generation**: Creates realistic snooker match scenarios with professional player statistics
-2. **ELO Calculation**: Updates tournament-specific ratings based on match results and importance
-3. **Feature Extraction**: Converts matches into ML-ready format with snooker-specific metrics
-4. **Model Training**: Tests multiple algorithms and selects the best performer
-5. **Prediction**: Combines ML model with ELO ratings for comprehensive match prediction
+1. **📡 Data Collection**: Fetches actual matches from snooker.org API (2015-2024)
+2. **🏆 Tournament Processing**: Processes real World Championships, Masters, UK Championships
+3. **⚖️ ELO Building**: Calculates ratings from actual match outcomes and results
+4. **🎯 Feature Engineering**: Creates tennis-style features from real snooker statistics
+5. **🤖 Model Training**: Tests ELO→RF→XGBoost→Optimized sequence (tennis approach)
+6. **🚀 Optimization**: 100 Optuna trials for aggressive hyperparameter tuning
+7. **🎱 Prediction**: Combines best ML model with real ELO ratings for match prediction
 
 ## 🏆 Famous Rivalries to Try
 
@@ -333,12 +335,13 @@ Professional snooker prediction system
 
 ## 🤝 Contributing
 
-This snooker prediction system is adapted from the tennis prediction AI. To contribute:
+This snooker prediction system now uses **REAL DATA** and follows the tennis 85% accuracy model. To contribute:
 
-1. Add new snooker-specific features
-2. Improve player name matching
-3. Enhance tournament modeling
-4. Add historical match data integration
+1. **🆔 Tournament Event IDs**: Add more snooker.org API event IDs for additional tournaments
+2. **📊 Enhanced Statistics**: Extract more detailed statistics from API responses
+3. **🎯 Feature Engineering**: Create new tennis-style combined features
+4. **🚀 Model Optimization**: Improve the Optuna hyperparameter search space
+5. **🏆 Tournament Expansion**: Add more historical years or tournament types
 
 ## 📄 License
 
@@ -394,6 +397,24 @@ python train_snooker_model.py
 python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
 ```
 
+## 🔥 What's New: Real Data Integration
+
+### ✅ **Major Upgrade**: No More Synthetic Data!
+- **📡 REAL API Integration**: Now uses actual snooker.org tournament data
+- **🏆 10 Years of History**: 2015-2024 World Championships, Masters, UK Championships
+- **⚖️ Authentic ELO**: Built from real match outcomes, not simulated
+- **🎯 85% Accuracy Target**: Following the proven tennis model approach
+- **🚀 Advanced ML**: Sequential testing with Optuna hyperparameter optimization
+
+### 🆚 **Before vs After**
+| **Old System** | **New System** |
+|----------------|----------------|
+| ❌ Synthetic matches | ✅ Real tournament data |
+| ❌ Random statistics | ✅ Actual player performance |
+| ❌ Fake ELO ratings | ✅ Real ELO from match outcomes |
+| ❌ Basic ML training | ✅ Tennis-inspired 85% model |
+| ❌ Simulated rivalries | ✅ Authentic head-to-head records |
+
 ---
 
-**🎱 Ready to predict snooker matches with professional-grade AI!**
+**🎱 Ready to predict snooker matches with REAL data and professional-grade AI!**
