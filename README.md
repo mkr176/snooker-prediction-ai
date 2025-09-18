@@ -15,9 +15,8 @@ Professional snooker match prediction system using machine learning and ELO rati
 
 ### Prerequisites
 
-```bash
-pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
-```
+- Python 3.8+
+- Virtual environment (recommended)
 
 ### Installation
 
@@ -26,6 +25,30 @@ pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
 ```bash
 cd snooker-prediction-ai
 ```
+
+3. Create and activate virtual environment:
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate on Windows
+venv\Scripts\activate
+
+# Activate on macOS/Linux
+source venv/bin/activate
+```
+
+4. Install required packages:
+```bash
+pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+```
+
+5. **Train the model first** (required before making predictions):
+```bash
+python train_snooker_model.py
+```
+
+This will generate training data and save the trained model to the `models/` directory.
 
 ### Usage
 
@@ -94,18 +117,38 @@ The system includes comprehensive data for professional players including:
 
 ## 🤖 Training the Model
 
-Generate training data and train the prediction model:
+**Important**: You must train the model before making predictions!
 
 ```bash
+# Make sure virtual environment is activated
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+# Train the model
 python train_snooker_model.py
 ```
 
 This will:
 1. Generate comprehensive snooker dataset (25,000 matches)
-2. Create snooker-specific features
-3. Train multiple ML models
-4. Save the best performing model
-5. Analyze feature importance
+2. Create snooker-specific features with professional player statistics
+3. Train multiple ML models (LightGBM, XGBoost, Random Forest)
+4. Save the best performing model to `models/snooker_prediction_model.pkl`
+5. Save feature columns to `models/snooker_features.pkl`
+6. Save data scaler to `models/snooker_scaler.pkl`
+7. Analyze feature importance and display top predictive features
+
+Expected output:
+```
+🎱 SNOOKER PREDICTION MODEL TRAINING
+========================================
+📊 STEP 1: GENERATING SNOOKER DATASET
+📊 STEP 2: PREPARING TRAINING DATA
+🤖 STEP 3: TRAINING MODELS
+📈 STEP 4: FEATURE ANALYSIS
+💾 STEP 5: SAVING MODEL
+🚀 SNOOKER MODEL TRAINING COMPLETE!
+```
+
+Training typically takes 2-5 minutes depending on your system.
 
 ## 📊 Snooker-Specific Features
 
@@ -167,17 +210,25 @@ Example successful matches:
 
 ```
 snooker-prediction-ai/
+├── venv/                             # Virtual environment (after setup)
 ├── src/
 │   ├── snooker_predictor.py          # Main prediction engine
 │   ├── snooker_data_collector.py     # Dataset generation
 │   ├── snooker_elo_system.py         # ELO rating system
 │   └── __init__.py
-├── models/                           # Trained ML models
-├── data/                             # Generated datasets
+├── models/                           # Trained ML models (created after training)
+│   ├── snooker_prediction_model.pkl  # Best trained model
+│   ├── snooker_features.pkl          # Feature columns
+│   └── snooker_scaler.pkl            # Data scaler
+├── data/                             # Generated datasets (created after training)
+│   ├── snooker_matches.csv           # Training dataset
+│   └── snooker_elo_ratings.pkl       # ELO system
 ├── predict_snooker_match.py          # Interactive interface
 ├── train_snooker_model.py            # Model training script
 └── README.md                         # This file
 ```
+
+**Note**: The `models/` and `data/` directories are created automatically when you run the training script.
 
 ## 🔧 Advanced Configuration
 
@@ -278,6 +329,56 @@ This snooker prediction system is adapted from the tennis prediction AI. To cont
 ## 📄 License
 
 Open source project - feel free to use and modify for snooker prediction analysis.
+
+---
+
+## ⚠️ Troubleshooting
+
+### Model Not Found Error
+If you get an error about missing model files:
+```bash
+# Make sure you've trained the model first
+python train_snooker_model.py
+```
+
+### Virtual Environment Issues
+```bash
+# Deactivate and recreate if needed
+deactivate
+rm -rf venv
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+```
+
+### Import Errors
+Make sure you're in the project directory and have activated the virtual environment:
+```bash
+cd snooker-prediction-ai
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+```
+
+## 🔄 Complete Setup Workflow
+
+```bash
+# 1. Setup project
+cd snooker-prediction-ai
+python -m venv venv
+
+# 2. Activate environment
+source venv/bin/activate  # macOS/Linux
+# OR
+venv\Scripts\activate     # Windows
+
+# 3. Install dependencies
+pip install pandas numpy scikit-learn lightgbm xgboost matplotlib joblib
+
+# 4. Train model (REQUIRED)
+python train_snooker_model.py
+
+# 5. Make predictions
+python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
+```
 
 ---
 
