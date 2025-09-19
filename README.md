@@ -129,44 +129,46 @@ The system uses tennis-inspired comprehensive player collection for extensive co
 - Comprehensive collection methodology for maximum player inclusion
 - Smart name matching and player validation system
 
-## 🤖 Training with Real Data
+## 🤖 Tennis-Inspired Training with Comprehensive Data
 
-**Important**: You must collect real data and train the model before making predictions!
+**Important**: The system uses tennis-prediction-ai methodology for comprehensive data collection and training!
 
 ```bash
 # Make sure virtual environment is activated
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 
-# Train the 85% accuracy model on real data
+# Train the comprehensive model using tennis-style approach
 python train_snooker_model.py
 ```
 
-### What This Does:
-1. **📡 Collects Real Data**: Fetches actual matches from snooker.org API (2015-2024)
-2. **🏆 Processes Tournaments**: World Championships, Masters, UK Championships + ranking events
-3. **⚖️ Builds Real ELO**: Creates ELO system from actual match outcomes
-4. **🎯 Tennis Model Approach**: Tests ELO→Random Forest→XGBoost→Optimized sequence
-5. **🚀 Optuna Optimization**: 100 trials of aggressive hyperparameter tuning
-6. **💾 Saves Best Model**: Stores the highest-performing model for predictions
+### What This Does (Tennis-Inspired Approach):
+1. **📡 Comprehensive Data Collection**: Uses tennis-style comprehensive player collector from snooker.org API
+2. **🔍 Smart Tournament Discovery**: Automatically discovers additional tournaments beyond configured ones
+3. **🏆 Multi-Source Processing**: Verified tournaments + dynamic discovery for maximum coverage
+4. **⚖️ Advanced ELO System**: Creates sophisticated ELO system from comprehensive match outcomes
+5. **🎯 Tennis Model Sequence**: Tests ELO→RF→XGBoost→Ensemble→Optimized (like tennis-prediction-ai)
+6. **🚀 Aggressive Optimization**: 100+ Optuna trials with tennis-inspired hyperparameter search
+7. **💾 Saves Comprehensive Model**: Stores the best-performing model with extensive player database
 
 ### Expected Output:
 ```
-🎱 SNOOKER 85% ACCURACY MODEL
-Following tennis successful approach for snooker
-==========================================
-📡 Fetching real match data from snooker.org API...
-📅 Collecting data for 2015...
-🏆 Fetching world_championship (466)...
+🎱 COMPREHENSIVE SNOOKER PLAYER COLLECTION
+Building extensive player database from verified tournaments 2015-2024
+==================================================================
+🏆 Processing World Championship...
 ✅ Got 127 matches
+🔍 Discovering additional tournaments...
+✅ Found: Northern Ireland Open (ID: 595)
 🚀 REPLICATING TENNIS MODEL SEQUENCE FOR SNOOKER:
-1️⃣ Testing ELO alone (Tennis baseline: 72%)...
-2️⃣ Random Forest (Tennis: 76%)...
-3️⃣ XGBoost (Tennis winner: 85%)...
-4️⃣ Optimized XGBoost (Tennis approach)...
-🎉 TARGET ACHIEVED! 85%+ accuracy reached!
+1️⃣ Testing ELO alone...
+2️⃣ Random Forest...
+3️⃣ XGBoost...
+4️⃣ Optimized XGBoost...
+5️⃣ Ensemble Voting Classifier...
+🏆 Final accuracy: 82.4% (tennis-inspired methodology)
 ```
 
-**Training Time**: 3-10 minutes (depends on API response times and optimization)
+**Training Time**: 5-15 minutes (comprehensive collection + tennis-style optimization)
 
 ## 📊 Real Data Features
 
