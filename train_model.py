@@ -71,9 +71,10 @@ def main():
         logger.info("Model Performance:")
         print(summary)
 
-        # Save models
-        models.save_models()
-        logger.info("Models saved successfully!")
+        # Save models with absolute path
+        model_path = str(Path(__file__).parent / "models" / "trained")
+        models.save_models(model_path)
+        logger.info(f"Models saved to: {model_path}")
 
         return 0
 

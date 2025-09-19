@@ -39,7 +39,7 @@ def predict_match(player1: str, player2: str, tournament: str = "General"):
 
         # Load trained models
         models = SnookerPredictionModels()
-        model_path = config.get('paths.trained_models', './models/trained')
+        model_path = str(Path(__file__).parent / "models" / "trained")
 
         try:
             models.load_models(model_path)
