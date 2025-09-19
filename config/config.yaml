@@ -1,0 +1,283 @@
+# Snooker Prediction AI Configuration File
+
+# Data Collection Settings
+data_collection:
+  # API settings
+  api:
+    rate_limit: 1.0  # seconds between requests
+    timeout: 30      # request timeout in seconds
+    retry_attempts: 3
+
+  # Scraping settings
+  scraping:
+    delay: 1.0          # seconds between requests
+    user_agent: "SnookerPredictionAI/1.0"
+    max_pages: 100
+
+  # Data sources
+  sources:
+    world_snooker_url: "http://www.worldsnooker.com"
+    api_endpoints:
+      rankings: "/api/rankings"
+      tournaments: "/api/tournaments"
+      matches: "/api/matches"
+      players: "/api/players"
+
+  # Tournaments to track
+  tournaments:
+    - "World Championship"
+    - "UK Championship"
+    - "Masters"
+    - "Champion of Champions"
+    - "Welsh Open"
+    - "Players Championship"
+    - "Gibraltar Open"
+    - "German Masters"
+    - "European Masters"
+    - "English Open"
+
+# Data Processing Settings
+preprocessing:
+  # Feature engineering
+  features:
+    # Historical window for form calculation
+    form_window: 10
+
+    # Features to create
+    create_ranking_features: true
+    create_head_to_head_features: true
+    create_form_features: true
+    create_tournament_features: true
+    create_break_features: true
+    create_temporal_features: true
+
+  # Missing value handling
+  missing_values:
+    strategy: "median"  # mean, median, mode, constant
+    constant_value: 0
+
+  # Feature scaling
+  scaling:
+    method: "standard"  # standard, minmax, robust
+
+  # Feature selection
+  feature_selection:
+    enabled: true
+    method: "rfe"  # rfe, univariate, lasso
+    n_features: 50
+
+# Model Training Settings
+training:
+  # Cross-validation
+  cross_validation:
+    folds: 5
+    stratified: true
+    random_state: 42
+
+  # Train/validation split
+  validation_split: 0.2
+  test_split: 0.2
+
+  # Random state for reproducibility
+  random_state: 42
+
+  # Models to train
+  models:
+    random_forest:
+      enabled: true
+      hyperparameter_tuning: true
+      params:
+        n_estimators: 200
+        max_depth: 15
+        min_samples_split: 5
+        min_samples_leaf: 2
+        max_features: "sqrt"
+        class_weight: "balanced"
+
+    xgboost:
+      enabled: true
+      hyperparameter_tuning: true
+      params:
+        n_estimators: 300
+        max_depth: 8
+        learning_rate: 0.1
+        subsample: 0.8
+        colsample_bytree: 0.8
+        reg_alpha: 0.1
+        reg_lambda: 1.0
+
+    lightgbm:
+      enabled: true
+      hyperparameter_tuning: false
+      params:
+        n_estimators: 300
+        max_depth: 10
+        learning_rate: 0.1
+        num_leaves: 31
+        feature_fraction: 0.8
+        bagging_fraction: 0.8
+
+    neural_network:
+      enabled: true
+      hyperparameter_tuning: false
+      params:
+        layers: [256, 128, 64, 32]
+        dropout_rates: [0.3, 0.3, 0.2, 0.2]
+        learning_rate: 0.001
+        batch_size: 32
+        epochs: 200
+        early_stopping_patience: 20
+
+    logistic_regression:
+      enabled: true
+      hyperparameter_tuning: false
+      params:
+        C: 1.0
+        penalty: "l2"
+        max_iter: 1000
+        class_weight: "balanced"
+
+  # Hyperparameter tuning
+  hyperparameter_tuning:
+    method: "grid_search"  # grid_search, random_search, bayesian
+    cv_folds: 5
+    scoring: "roc_auc"
+    n_jobs: -1
+
+  # Ensemble settings
+  ensemble:
+    enabled: true
+    method: "weighted_average"  # weighted_average, voting, stacking
+    weighting_metric: "val_auc"
+
+# Model Evaluation Settings
+evaluation:
+  # Metrics to calculate
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "roc_auc"
+    - "log_loss"
+
+  # Evaluation strategies
+  strategies:
+    - "holdout"
+    - "cross_validation"
+    - "time_series_split"
+
+  # Threshold optimization
+  threshold_optimization:
+    enabled: true
+    method: "roc_curve"  # roc_curve, pr_curve, f1_score
+
+# Prediction Settings
+prediction:
+  # Default model for predictions
+  default_model: "xgboost"
+
+  # Confidence thresholds
+  confidence_thresholds:
+    low: 0.1
+    medium: 0.3
+    high: 0.5
+
+  # Output format
+  output_format:
+    include_probability: true
+    include_confidence: true
+    include_feature_importance: false
+
+# Data Paths
+paths:
+  # Data directories
+  raw_data: "./data/raw"
+  processed_data: "./data/processed"
+  tournament_data: "./data/tournaments"
+
+  # Model directories
+  trained_models: "./models/trained"
+  model_checkpoints: "./models/checkpoints"
+
+  # Configuration
+  preprocessor_state: "./config/preprocessor_state.json"
+  model_config: "./config/model_config.json"
+
+  # Logs
+  log_directory: "./logs"
+
+  # Outputs
+  predictions_output: "./output/predictions"
+  reports_output: "./output/reports"
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_logging: true
+  console_logging: true
+  log_rotation: true
+  max_log_size: "10MB"
+  backup_count: 5
+
+# Tournament Specific Settings
+tournaments:
+  # World Championship specific
+  world_championship:
+    importance_weight: 10.0
+    frames_to_win:
+      first_round: 10
+      second_round: 13
+      quarter_final: 13
+      semi_final: 17
+      final: 18
+
+  # UK Championship specific
+  uk_championship:
+    importance_weight: 8.0
+    frames_to_win:
+      early_rounds: 6
+      later_rounds: 9
+      semi_final: 9
+      final: 10
+
+  # Masters specific
+  masters:
+    importance_weight: 9.0
+    frames_to_win:
+      quarter_final: 6
+      semi_final: 6
+      final: 10
+
+# API Keys and Credentials (use environment variables)
+credentials:
+  # These should be set as environment variables
+  api_key: "${SNOOKER_API_KEY}"
+  database_url: "${DATABASE_URL}"
+
+# Performance Settings
+performance:
+  # Parallel processing
+  n_jobs: -1
+
+  # Memory management
+  memory_limit: "8GB"
+  chunk_size: 1000
+
+  # GPU settings (if available)
+  use_gpu: false
+  gpu_memory_limit: "4GB"
+
+# Monitoring and Alerts
+monitoring:
+  # Model performance monitoring
+  performance_threshold: 0.65  # minimum acceptable accuracy
+
+  # Data drift detection
+  data_drift_detection: true
+  drift_threshold: 0.05
+
+  # Alerts
+  email_alerts: false
+  slack_alerts: false
