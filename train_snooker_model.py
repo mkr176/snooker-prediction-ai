@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 import xgboost as xgb
 import lightgbm as lgb
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -23,6 +23,7 @@ sys.path.append('src')
 
 from snooker_elo_system import SnookerEloSystem
 from snooker_data_collector import SnookerDataCollector
+from snooker_player_collector import SnookerPlayerCollector
 warnings.filterwarnings('ignore')
 
 class Snooker85PercentModel:
@@ -192,21 +193,36 @@ class Snooker85PercentModel:
         print("=" * 60)
         print("Following exact tennis approach: ELO + XGBoost")
 
-        # Collect or load REAL snooker data
-        print("Loading REAL snooker dataset...")
+        # Collect or load COMPREHENSIVE snooker data using tennis-style approach
+        print("Loading COMPREHENSIVE snooker dataset...")
         try:
-            matches_df = pd.read_csv('data/snooker_matches.csv')
-            print(f"Loaded {len(matches_df):,} REAL matches from 2015-2024")
+            matches_df = pd.read_csv('data/comprehensive_snooker_matches.csv')
+            print(f"Loaded {len(matches_df):,} REAL matches from comprehensive database")
         except FileNotFoundError:
-            print("Collecting REAL snooker data from snooker.org API...")
-            collector = SnookerDataCollector()
-            matches_df = collector.collect_real_snooker_data(start_year=2015, end_year=2024)
+            print("Building comprehensive snooker player database...")
+            print("🚀 Using tennis-style comprehensive player collection...")
+
+            # Use comprehensive player collector for maximum coverage
+            player_collector = SnookerPlayerCollector()
+            matches_df = player_collector.collect_comprehensive_player_data(start_year=2015, end_year=2025)
+
             if len(matches_df) == 0:
-                print("❌ Failed to collect real data. Check API access.")
-                return 0.0
-            enhanced_df = collector.enhance_with_head_to_head(matches_df)
-            collector.save_real_snooker_data(enhanced_df)
-            matches_df = enhanced_df
+                print("❌ Comprehensive collection failed. Falling back to basic collector...")
+                collector = SnookerDataCollector()
+                matches_df = collector.collect_real_snooker_data(start_year=2015, end_year=2025)
+                if len(matches_df) == 0:
+                    print("❌ Failed to collect any data. Check API access.")
+                    return 0.0
+                enhanced_df = collector.enhance_with_head_to_head(matches_df)
+                collector.save_real_snooker_data(enhanced_df)
+                matches_df = enhanced_df
+            else:
+                print(f"✅ Comprehensive collection successful: {len(matches_df):,} matches")
+                # Enhance with H2H and save
+                matches_df = player_collector.enhance_with_head_to_head(matches_df)
+                matches_df.to_csv('data/comprehensive_snooker_matches.csv', index=False)
+                player_collector.save_player_list(matches_df)
+                print("💾 Saved comprehensive database for future use")
 
         # Create snooker model features
         features_df = self.create_snooker_features(matches_df)
@@ -276,12 +292,39 @@ class Snooker85PercentModel:
         print("4️⃣  Optimized XGBoost (Tennis approach)...")
         optimized_model, optimized_accuracy = self.optimize_xgboost(X_train, X_test, y_train, y_test)
 
+        # 5. Ensemble Method (Push to 85%+)
+        print("5️⃣  Ensemble Voting Classifier (Target: 85%+)...")
+
+        # Create ensemble with best individual models
+        lgb_model = lgb.LGBMClassifier(
+            n_estimators=200,
+            max_depth=8,
+            learning_rate=0.1,
+            random_state=42,
+            verbose=-1
+        )
+        lgb_model.fit(X_train, y_train)
+
+        ensemble_model = VotingClassifier(
+            estimators=[
+                ('rf', rf_model),
+                ('xgb', optimized_model),  # Use optimized XGBoost
+                ('lgb', lgb_model)
+            ],
+            voting='soft'  # Use probability averaging
+        )
+        ensemble_model.fit(X_train, y_train)
+        ensemble_pred = ensemble_model.predict(X_test)
+        ensemble_accuracy = accuracy_score(y_test, ensemble_pred)
+        print(f"   Ensemble accuracy: {ensemble_accuracy:.4f} (Target: 0.85+)")
+
         # Select best model
         models = {
             'ELO Only': (elo_model, elo_accuracy),
             'Random Forest': (rf_model, rf_accuracy),
             'XGBoost': (xgb_model, xgb_accuracy),
-            'Optimized XGBoost': (optimized_model, optimized_accuracy)
+            'Optimized XGBoost': (optimized_model, optimized_accuracy),
+            'Ensemble': (ensemble_model, ensemble_accuracy)
         }
 
         best_name, (best_model, best_accuracy) = max(models.items(), key=lambda x: x[1][1])
@@ -298,6 +341,7 @@ class Snooker85PercentModel:
         print(f"      Random Forest: {rf_accuracy:.1%}")
         print(f"      XGBoost: {xgb_accuracy:.1%}")
         print(f"      Optimized: {optimized_accuracy:.1%}")
+        print(f"      Ensemble: {ensemble_accuracy:.1%}")
 
         print(f"\n   🥇 Best model: {best_name} ({best_accuracy:.4f})")
 

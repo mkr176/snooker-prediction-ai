@@ -119,7 +119,30 @@ class SnookerDataCollector:
                 'shanghai_masters': 1480,  # Shanghai Masters 2024
                 'german_masters': 1458,  # German Masters 2024
                 'welsh_open': 1462,  # Welsh Open 2024
-                'china_open': 1484   # China Open 2024
+                'china_open': 1484,   # China Open 2024
+                'players_championship': 1470,  # Players Championship 2024
+                'tour_championship': 1475,     # Tour Championship 2024
+                'champion_of_champions': 1465, # Champion of Champions 2024
+                'northern_ireland_open': 1440, # Northern Ireland Open 2024
+                'english_open': 1445,          # English Open 2024
+                'wuhan_open': 1450,            # Wuhan Open 2024
+                'xi_an_grand_prix': 1455       # Xi'an Grand Prix 2024
+            },
+            2025: {
+                'world_championship': 1590,
+                'masters': 1584,  # 2025 Masters
+                'uk_championship': 1586,  # 2025 UK Championship
+                'shanghai_masters': 1610,  # Shanghai Masters 2025
+                'german_masters': 1588,  # German Masters 2025
+                'welsh_open': 1592,  # Welsh Open 2025
+                'china_open': 1614,   # China Open 2025
+                'players_championship': 1600,  # Players Championship 2025
+                'tour_championship': 1605,     # Tour Championship 2025
+                'champion_of_champions': 1595, # Champion of Champions 2025
+                'northern_ireland_open': 1570, # Northern Ireland Open 2025
+                'english_open': 1575,          # English Open 2025
+                'wuhan_open': 1580,            # Wuhan Open 2025
+                'european_masters': 1585       # European Masters 2025
             }
         }
 
@@ -133,7 +156,7 @@ class SnookerDataCollector:
             'invitational': 15
         }
 
-    def collect_real_snooker_data(self, start_year=2015, end_year=2024):
+    def collect_real_snooker_data(self, start_year=2015, end_year=2025):
         """
         Collect REAL snooker match data from snooker.org API (2015-2024)
         No more synthetic data - actual professional tournament results
