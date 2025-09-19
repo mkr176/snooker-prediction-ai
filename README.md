@@ -1,431 +1,355 @@
-# 🎱 Snooker Prediction AI
+# Snooker Prediction AI 🎱
 
-Professional snooker match prediction system using **COMPREHENSIVE REAL DATA** and advanced machine learning. Achieves **82.4% accuracy** using tennis-inspired methodology with **comprehensive tournament coverage from 2015-2024**.
+A comprehensive machine learning system for predicting snooker match outcomes using player statistics, historical data, and tournament information.
 
-## ✨ Features
+## Features
 
-- **📡 COMPREHENSIVE DATA**: Uses tennis-style comprehensive player collection from snooker.org API
-- **🏆 Extensive Tournament Coverage**: Multiple data sources and tournament discovery for maximum player database
-- **🎯 82.4% Accuracy Achieved**: Following tennis model approach with ELO + Ensemble Methods + Optimized XGBoost
-- **⚖️ Advanced ELO System**: Built from actual match outcomes with sophisticated player tracking
-- **🤖 Tennis-Inspired Architecture**: Sequential testing (ELO→RF→XGBoost→Ensemble→Optimized) with 100+ Optuna trials
-- **📊 Comprehensive Features**: Real tournament weights, extensive player statistics, genuine match contexts
-- **🎱 Extensive Player Database**: Professional players from major tournaments with comprehensive coverage
-- **🔍 Smart Player Discovery**: Automatic tournament detection for maximum player inclusion
+- **Data Collection**: Automated scraping and API collection from snooker tournaments
+- **Advanced ML Models**: XGBoost, LightGBM, Random Forest, Neural Networks, and ensemble methods
+- **Feature Engineering**: Head-to-head records, recent form, ranking differences, tournament importance
+- **Real-time Predictions**: Predict match outcomes with confidence scores
+- **Value Betting**: Calculate expected value for betting opportunities
+- **Tournament Analysis**: Comprehensive analysis of major tournaments
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.8+
-- Virtual environment (recommended)
-
-### Installation
-
-1. Clone or download the snooker prediction system
-2. Navigate to the project directory:
-```bash
-cd snooker-prediction-ai
-```
-
-3. Create and activate virtual environment:
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate on Windows
-venv\Scripts\activate
-
-# Activate on macOS/Linux
-source venv/bin/activate
-```
-
-4. Install required packages:
-```bash
-pip install -r requirements.txt
-```
-
-5. **Train the model first** (required before making predictions):
-```bash
-python train_snooker_model.py
-```
-
-This will use comprehensive player collection to build an extensive database and train the 82.4% accuracy model with tennis-inspired methodology.
-
-### Usage
-
-#### Interactive Prediction
-```bash
-python predict_snooker_match.py
-```
-
-#### Direct Prediction
-```bash
-python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
-```
-
-#### With Tournament and Format Options
-```bash
-python predict_snooker_match.py "Mark Selby" "Neil Robertson" --tournament world_championship --best-of 35
-```
-
-#### See Example Rivalries
-```bash
-python predict_snooker_match.py --examples
-```
-
-## 🏆 Comprehensive Tournament Coverage (2015-2024)
-
-### **Triple Crown Events** (Verified Working IDs)
-- **World Championships** - Complete coverage 2015-2024 (All Crucible championships)
-- **Masters** - Elite invitational tournaments (Alexandra Palace)
-- **UK Championships** - Major ranking events (York Barbican)
-
-### **Major Ranking Events** (Comprehensive Collection)
-- **Shanghai Masters** - Premier Asian tournament
-- **German Masters** - European ranking event
-- **Welsh Open** - Traditional ranking tournament
-- **China Open** - Major Asian ranking event
-
-### **Tennis-Style Player Discovery**
-- **Automatic Tournament Detection**: Discovers additional tournaments through API exploration
-- **Comprehensive Player Database**: Uses tennis-prediction-ai methodology for maximum coverage
-- **Smart ID Discovery**: Finds tournaments beyond manually configured ones
-- **Multi-Source Collection**: Verified IDs + dynamic discovery for complete player inclusion
-
-**Total Coverage**: 70+ verified tournaments + dynamic discovery across 10 years of professional snooker
-
-## 📏 Match Formats
-
-- **Best of 7** (first to 4) - Short format
-- **Best of 9** (first to 5) - Standard format
-- **Best of 11** (first to 6) - Extended format
-- **Best of 17** (first to 9) - Semi-final format
-- **Best of 19** (first to 10) - Quarter-final format
-- **Best of 35** (first to 18) - World Championship Final
-
-## 🎱 Comprehensive Player Database
-
-The system uses tennis-inspired comprehensive player collection for extensive coverage:
-
-**Current Database: 52+ Professional Players** (with automatic expansion)
-
-**Current Top Players:**
-- Ronnie O'Sullivan, Judd Trump, Mark Selby, Neil Robertson
-- John Higgins, Mark Williams, Kyren Wilson, Jack Lisowski
-- Shaun Murphy, Stuart Bingham, Zhou Yuelong, Yan Bingtao
-
-**Active Professionals:**
-- Jamie Jones, Gary Wilson, Anthony McGill, Barry Hawkins
-- Ali Carter, David Gilbert, Ding Junhui, Luca Brecel
-- Mark Allen, Ricky Walden, Michael Holt, Ryan Day
-
-**International Players:**
-- Zhao Xintong, Lyu Haotian, Hossein Vafaei, Thepchaiya Un-Nooh
-- Noppon Saengkham, Yuan Sijun, Tian Pengfei
-
-**Tennis-Style Dynamic Expansion:**
-- Automatic discovery of additional players through tournament API exploration
-- Comprehensive collection methodology for maximum player inclusion
-- Smart name matching and player validation system
-
-## 🤖 Tennis-Inspired Training with Comprehensive Data
-
-**Important**: The system uses tennis-prediction-ai methodology for comprehensive data collection and training!
-
-```bash
-# Make sure virtual environment is activated
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-
-# Train the comprehensive model using tennis-style approach
-python train_snooker_model.py
-```
-
-### What This Does (Tennis-Inspired Approach):
-1. **📡 Comprehensive Data Collection**: Uses tennis-style comprehensive player collector from snooker.org API
-2. **🔍 Smart Tournament Discovery**: Automatically discovers additional tournaments beyond configured ones
-3. **🏆 Multi-Source Processing**: Verified tournaments + dynamic discovery for maximum coverage
-4. **⚖️ Advanced ELO System**: Creates sophisticated ELO system from comprehensive match outcomes
-5. **🎯 Tennis Model Sequence**: Tests ELO→RF→XGBoost→Ensemble→Optimized (like tennis-prediction-ai)
-6. **🚀 Aggressive Optimization**: 100+ Optuna trials with tennis-inspired hyperparameter search
-7. **💾 Saves Comprehensive Model**: Stores the best-performing model with extensive player database
-
-### Expected Output:
-```
-🎱 COMPREHENSIVE SNOOKER PLAYER COLLECTION
-Building extensive player database from verified tournaments 2015-2024
-==================================================================
-🏆 Processing World Championship...
-✅ Got 127 matches
-🔍 Discovering additional tournaments...
-✅ Found: Northern Ireland Open (ID: 595)
-🚀 REPLICATING TENNIS MODEL SEQUENCE FOR SNOOKER:
-1️⃣ Testing ELO alone...
-2️⃣ Random Forest...
-3️⃣ XGBoost...
-4️⃣ Optimized XGBoost...
-5️⃣ Ensemble Voting Classifier...
-🏆 Final accuracy: 82.4% (tennis-inspired methodology)
-```
-
-**Training Time**: 5-15 minutes (comprehensive collection + tennis-style optimization)
-
-## 📊 Real Data Features
-
-### **Core ELO Features** (Most Important - 72% accuracy alone)
-- **ELO Difference**: Rating gap between players
-- **Total ELO**: Combined rating strength
-- **Recent Form**: Performance in last 50 matches
-- **Recent Momentum**: Win/loss streaks
-- **Experience Difference**: Career matches played
-
-### **Snooker-Specific Statistics** (From Real Matches)
-- **Centuries Made**: Actual century breaks from tournaments
-- **Highest Breaks**: Real highest breaks achieved
-- **Frame Scores**: Actual match scores and frame counts
-- **Tournament Context**: Real World Championships vs Masters vs ranking events
-
-### **Tournament Features** (From Real Events)
-- **Tournament Weight**: Actual importance (World Championship: 50, Masters: 35)
-- **Tournament Type**: Real event classification
-- **Match Duration**: Actual match lengths when available
-- **Head-to-Head**: Real historical matchup records
-
-### **Combined Features** (Tennis Model Approach)
-- **ELO × Form**: Rating strength combined with recent performance
-- **Form × Momentum**: Recent form amplified by win streaks
-
-## 📈 Example Predictions
-
-```bash
-# Classic rivalry
-python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
-
-# Tactical vs attacking
-python predict_snooker_match.py "Mark Selby" "Neil Robertson" --tournament masters
-
-# World Championship final
-python predict_snooker_match.py "John Higgins" "Mark Williams" --tournament world_championship --best-of 35
-```
-
-## 🎯 Name Matching Features
-
-The system includes advanced name matching:
-
-- **Case Insensitive**: Works with any capitalization
-- **Fuzzy Matching**: Handles typos and variations
-- **Apostrophe Handling**: O'Sullivan, O'Connor, etc.
-- **Accent Support**: Handles international characters
-- **Smart Suggestions**: Provides closest matches when exact match fails
-
-Example successful matches:
-- "ronnie osullivan" → Ronnie O'Sullivan
-- "JUDD TRUMP" → Judd Trump
-- "mark selby" → Mark Selby
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 snooker-prediction-ai/
-├── venv/                             # Virtual environment (after setup)
+├── config/
+│   ├── config.yaml                 # Main configuration file
+│   └── preprocessor_state.json     # Saved preprocessor state
+├── data/
+│   ├── raw/                        # Raw collected data
+│   ├── processed/                  # Processed training data
+│   └── tournaments/                # Tournament-specific data
 ├── src/
-│   ├── snooker_predictor.py          # Main prediction engine
-│   ├── snooker_data_collector.py     # Dataset generation
-│   ├── snooker_elo_system.py         # ELO rating system
-│   └── __init__.py
-├── models/                           # Trained ML models (created after training)
-│   ├── snooker_prediction_model.pkl  # Best trained model
-│   ├── snooker_features.pkl          # Feature columns
-│   └── snooker_scaler.pkl            # Data scaler
-├── data/                             # Generated datasets (created after training)
-│   ├── snooker_matches.csv           # Training dataset
-│   └── snooker_elo_ratings.pkl       # ELO system
-├── predict_snooker_match.py          # Interactive interface
-├── train_snooker_model.py            # Model training script
-├── requirements.txt                  # Python dependencies
-└── README.md                         # This file
+│   ├── data_collection/
+│   │   ├── snooker_scraper.py      # Web scraping utilities
+│   │   └── api_collector.py        # API data collection
+│   ├── preprocessing/
+│   │   └── data_preprocessor.py    # Data preprocessing and feature engineering
+│   ├── models/
+│   │   └── snooker_models.py       # ML models and training
+│   └── utils/
+│       ├── config_manager.py       # Configuration management
+│       └── prediction_utils.py     # Prediction utilities
+├── models/
+│   ├── trained/                    # Saved trained models
+│   └── checkpoints/                # Model checkpoints
+├── notebooks/                      # Jupyter notebooks for analysis
+├── tests/                          # Unit tests
+├── requirements.txt                # Python dependencies
+├── train_model.py                  # Main training script
+└── predict.py                      # Prediction script
 ```
 
-**Note**: The `models/` and `data/` directories are created automatically when you run the training script.
+## Installation
 
-## 🔧 Advanced Configuration
-
-### Custom Tournament Types
-Modify `snooker_elo_system.py` to add new tournament types with custom weights.
-
-### Feature Engineering
-Extend `snooker_data_collector.py` to add new snooker-specific features like:
-- Break-off success rates
-- Crowd performance factors
-- Head-to-head frame patterns
-- Tournament venue performance
-
-### Model Tuning
-Adjust hyperparameters in `train_snooker_model.py` for optimal performance.
-
-## 📊 Model Performance (Real Data)
-
-### **85% Accuracy Target** (Following Tennis Model)
-- **ELO Baseline**: ~72% accuracy (matches tennis benchmark)
-- **Random Forest**: ~76% accuracy (matches tennis benchmark)
-- **XGBoost**: 85%+ accuracy target (tennis achieved this)
-- **Optimized XGBoost**: Peak performance with Optuna tuning
-
-### **Training Methodology** (Tennis-Inspired)
-1. **Sequential Testing**: Test each approach incrementally
-2. **Aggressive Optimization**: 100 Optuna trials for hyperparameter tuning
-3. **Real Data Validation**: No synthetic data - only actual tournament results
-4. **Feature Importance**: ELO dominance confirmed (like tennis model)
-
-## 🎱 How It Works (Real Data Pipeline)
-
-1. **📡 Data Collection**: Fetches actual matches from snooker.org API (2015-2024)
-2. **🏆 Tournament Processing**: Processes real World Championships, Masters, UK Championships
-3. **⚖️ ELO Building**: Calculates ratings from actual match outcomes and results
-4. **🎯 Feature Engineering**: Creates tennis-style features from real snooker statistics
-5. **🤖 Model Training**: Tests ELO→RF→XGBoost→Optimized sequence (tennis approach)
-6. **🚀 Optimization**: 100 Optuna trials for aggressive hyperparameter tuning
-7. **🎱 Prediction**: Combines best ML model with real ELO ratings for match prediction
-
-## 🏆 Famous Rivalries to Try
-
+1. **Clone the repository**:
 ```bash
-# The two modern greats
-python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
-
-# Tactical vs attacking styles
-python predict_snooker_match.py "Mark Selby" "Neil Robertson"
-
-# Scottish vs Welsh rivalry
-python predict_snooker_match.py "John Higgins" "Mark Williams"
-
-# Rising stars battle
-python predict_snooker_match.py "Kyren Wilson" "Jack Lisowski"
-
-# Experienced campaigners
-python predict_snooker_match.py "Shaun Murphy" "Stuart Bingham"
+git clone <repository-url>
+cd snooker-prediction-ai
 ```
 
-## 📝 Sample Output
-
-```
-🎱 SNOOKER MATCH PREDICTOR
-Professional snooker prediction system
-==================================================
-
-🔮 Predicting Ronnie O'Sullivan vs Judd Trump...
-   Tournament: World Championship
-   Format: Best of 35 (first to 18)
-
-==================================================
-🎯 PREDICTION COMPLETE!
-==================================================
-
-🏆 WINNER: Ronnie O'Sullivan
-📊 Confidence: 64.2%
-
-📈 DETAILED PROBABILITIES:
-   Ronnie O'Sullivan: 64.2%
-   Judd Trump: 35.8%
-
-🎱 MATCH DETAILS:
-   Tournament: World Championship
-   Format: Best of 35 (first to 18)
-
-⚖️  ELO RATINGS:
-   Ronnie O'Sullivan: 1847
-   Judd Trump: 1723
-   Difference: 124 points
-
-🤖 MODEL vs ELO: ✅ Agree
-   ML Model favors: Ronnie O'Sullivan
-   ELO favors: Ronnie O'Sullivan
-
-👍 Moderate prediction - Slight edge to winner
-```
-
-## 🤝 Contributing
-
-This snooker prediction system now uses **REAL DATA** and follows the tennis 85% accuracy model. To contribute:
-
-1. **🆔 Tournament Event IDs**: Add more snooker.org API event IDs for additional tournaments
-2. **📊 Enhanced Statistics**: Extract more detailed statistics from API responses
-3. **🎯 Feature Engineering**: Create new tennis-style combined features
-4. **🚀 Model Optimization**: Improve the Optuna hyperparameter search space
-5. **🏆 Tournament Expansion**: Add more historical years or tournament types
-
-## 📄 License
-
-Open source project - feel free to use and modify for snooker prediction analysis.
-
----
-
-## ⚠️ Troubleshooting
-
-### Model Not Found Error
-If you get an error about missing model files:
+2. **Create virtual environment**:
 ```bash
-# Make sure you've trained the model first
-python train_snooker_model.py
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-### Virtual Environment Issues
+3. **Install dependencies**:
 ```bash
-# Deactivate and recreate if needed
-deactivate
-rm -rf venv
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
 pip install -r requirements.txt
 ```
 
-### Import Errors
-Make sure you're in the project directory and have activated the virtual environment:
-```bash
-cd snooker-prediction-ai
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-```
+## Quick Start
 
-## 🔄 Complete Setup Workflow
+### 1. Train Models
 
 ```bash
-# 1. Setup project
-cd snooker-prediction-ai
-python -m venv venv
+# Train all models with default configuration
+python train_model.py
 
-# 2. Activate environment
-source venv/bin/activate  # macOS/Linux
-# OR
-venv\Scripts\activate     # Windows
+# Train specific models
+python train_model.py --models xgboost lightgbm
 
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Train model (REQUIRED)
-python train_snooker_model.py
-
-# 5. Make predictions
-python predict_snooker_match.py "Ronnie O'Sullivan" "Judd Trump"
+# Skip data collection (use existing data)
+python train_model.py --skip-data-collection
 ```
 
-## 🔥 What's New: Real Data Integration
+### 2. Make Predictions
 
-### ✅ **Major Upgrade**: No More Synthetic Data!
-- **📡 REAL API Integration**: Now uses actual snooker.org tournament data
-- **🏆 10 Years of History**: 2015-2024 World Championships, Masters, UK Championships
-- **⚖️ Authentic ELO**: Built from real match outcomes, not simulated
-- **🎯 85% Accuracy Target**: Following the proven tennis model approach
-- **🚀 Advanced ML**: Sequential testing with Optuna hyperparameter optimization
+```bash
+# Predict match outcome
+python predict.py --player1 "Ronnie O'Sullivan" --player2 "Judd Trump" --tournament "World Championship"
 
-### 🆚 **Before vs After**
-| **Old System** | **New System** |
-|----------------|----------------|
-| ❌ Synthetic matches | ✅ Real tournament data |
-| ❌ Random statistics | ✅ Actual player performance |
-| ❌ Fake ELO ratings | ✅ Real ELO from match outcomes |
-| ❌ Basic ML training | ✅ Tennis-inspired 85% model |
-| ❌ Simulated rivalries | ✅ Authentic head-to-head records |
+# Simple prediction
+python predict.py --player1 "Mark Selby" --player2 "Neil Robertson"
+```
+
+### 3. Collect Data
+
+```python
+from src.data_collection.snooker_scraper import SnookerScraper
+from src.data_collection.api_collector import SnookerAPICollector
+
+# Initialize collectors
+scraper = SnookerScraper()
+api_collector = SnookerAPICollector()
+
+# Collect tournament data
+tournaments = scraper.get_tournaments("2023-24")
+matches = scraper.get_match_results("World Championship", "2023-24")
+
+# Collect live data
+rankings = api_collector.get_live_rankings()
+live_scores = api_collector.get_live_scores()
+```
+
+## Configuration
+
+The system uses a YAML configuration file (`config/config.yaml`) to manage all settings:
+
+### Key Configuration Sections
+
+- **data_collection**: API settings, scraping parameters, data sources
+- **preprocessing**: Feature engineering, scaling, missing value handling
+- **training**: Model parameters, cross-validation, ensemble settings
+- **evaluation**: Metrics, validation strategies
+- **prediction**: Default models, confidence thresholds
+
+### Example Configuration
+
+```yaml
+training:
+  models:
+    xgboost:
+      enabled: true
+      hyperparameter_tuning: true
+      params:
+        n_estimators: 300
+        max_depth: 8
+        learning_rate: 0.1
+
+prediction:
+  default_model: "xgboost"
+  confidence_thresholds:
+    low: 0.1
+    medium: 0.3
+    high: 0.5
+```
+
+## Models
+
+### Supported Models
+
+1. **XGBoost**: Gradient boosting with excellent performance on tabular data
+2. **LightGBM**: Fast gradient boosting with categorical feature support
+3. **Random Forest**: Ensemble of decision trees with feature importance
+4. **Neural Network**: Deep learning model with dropout and batch normalization
+5. **Logistic Regression**: Linear baseline model
+6. **Ensemble**: Weighted combination of top-performing models
+
+### Model Performance
+
+The system automatically evaluates models using:
+- Accuracy
+- ROC-AUC
+- Precision/Recall
+- F1-Score
+- Cross-validation
+
+## Features
+
+### Engineered Features
+
+The system creates comprehensive features for prediction:
+
+#### Player Features
+- Current world ranking
+- Recent form (win/loss record)
+- Average break scores
+- Century count statistics
+- Career achievements
+
+#### Head-to-Head Features
+- Historical match record
+- Recent head-to-head form
+- Average frames per match
+- Venue-specific performance
+
+#### Tournament Features
+- Tournament importance weight
+- Prize money
+- Venue characteristics
+- Round significance
+
+#### Temporal Features
+- Day of week effects
+- Session timing (afternoon/evening)
+- Seasonal performance trends
+
+## Usage Examples
+
+### Advanced Prediction with Custom Features
+
+```python
+from src.utils.prediction_utils import SnookerPredictionUtils
+from src.models.snooker_models import SnookerPredictionModels
+
+# Initialize utilities
+utils = SnookerPredictionUtils()
+models = SnookerPredictionModels()
+
+# Load trained models
+models.load_models("./models/trained")
+
+# Prepare features for prediction
+features = utils.prepare_prediction_features(
+    player1="Ronnie O'Sullivan",
+    player2="Judd Trump",
+    tournament="World Championship",
+    player1_rank=1,
+    player2_rank=2,
+    venue="Crucible Theatre"
+)
+
+# Make prediction
+prediction = models.predict_match(features, "xgboost")
+
+# Interpret results
+interpretation = utils.interpret_prediction(prediction, "Ronnie O'Sullivan", "Judd Trump")
+print(interpretation['match_summary'])
+```
+
+### Value Betting Analysis
+
+```python
+# Calculate value betting opportunity
+value_analysis = utils.calculate_value_bet(
+    prediction_prob=0.65,    # Model probability
+    bookmaker_odds=2.1,      # Bookmaker decimal odds
+    stake=10.0               # Stake amount
+)
+
+if value_analysis['is_value_bet']:
+    print(f"Value bet detected! Edge: {value_analysis['edge']:.3f}")
+    print(f"Expected value: ${value_analysis['expected_value']:.2f}")
+```
+
+## Data Sources
+
+### Supported Tournaments
+
+- World Championship
+- UK Championship
+- Masters
+- Champion of Champions
+- Welsh Open
+- Players Championship
+- Gibraltar Open
+- German Masters
+- European Masters
+- English Open
+
+### Data Collection Methods
+
+1. **Web Scraping**: Automated collection from official snooker websites
+2. **API Integration**: Real-time data from snooker APIs
+3. **Manual Data Entry**: Support for custom tournament data
+
+## Model Training
+
+### Training Pipeline
+
+1. **Data Collection**: Gather tournament and player data
+2. **Preprocessing**: Clean data, engineer features, encode categories
+3. **Feature Selection**: Select most predictive features
+4. **Model Training**: Train multiple models with cross-validation
+5. **Hyperparameter Tuning**: Optimize model parameters
+6. **Ensemble Creation**: Combine best models
+7. **Evaluation**: Comprehensive model evaluation
+8. **Model Saving**: Save trained models for prediction
+
+### Training Commands
+
+```bash
+# Full training pipeline
+python train_model.py
+
+# Hyperparameter tuning for specific model
+python train_model.py --models xgboost --tune-hyperparameters
+
+# Evaluation only (requires existing models)
+python train_model.py --evaluation-only
+```
+
+## Evaluation and Monitoring
+
+### Performance Metrics
+
+- **Accuracy**: Overall prediction accuracy
+- **ROC-AUC**: Area under the ROC curve
+- **Precision/Recall**: For both classes (player1 win/loss)
+- **Calibration**: How well probabilities match outcomes
+- **Feature Importance**: Most predictive features
+
+### Model Monitoring
+
+- Performance tracking over time
+- Data drift detection
+- Automatic retraining triggers
+- Alert system for performance degradation
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Dependencies
+
+### Core Dependencies
+
+- **pandas**: Data manipulation and analysis
+- **numpy**: Numerical computing
+- **scikit-learn**: Machine learning library
+- **xgboost**: Gradient boosting framework
+- **lightgbm**: Gradient boosting framework
+- **tensorflow**: Deep learning framework
+
+### Data Collection
+
+- **requests**: HTTP library
+- **beautifulsoup4**: Web scraping
+- **selenium**: Browser automation
+
+### Visualization
+
+- **matplotlib**: Plotting library
+- **seaborn**: Statistical data visualization
+- **plotly**: Interactive visualizations
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- World Snooker Tour for official data
+- Snooker community for insights and feedback
+- Open source ML libraries that make this project possible
+
+## Support
+
+For questions, issues, or feature requests:
+
+1. Check the [Issues](../../issues) page
+2. Create a new issue with detailed description
+3. For urgent matters, contact the maintainers
 
 ---
 
-**🎱 Ready to predict snooker matches with REAL data and professional-grade AI!**
+**Disclaimer**: This system is for educational and research purposes. Please gamble responsibly and within your means. Past performance does not guarantee future results.
